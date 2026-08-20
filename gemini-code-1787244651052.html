@@ -1,0 +1,82 @@
+<!-- Offline Intake Form (Upgraded) -->
+<div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col max-h-[75vh]">
+    <div class="flex justify-between items-center mb-4">
+        <h3 class="font-bold text-lg">Comprehensive Clinical Intake</h3>
+        <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-bold rounded flex items-center">
+            <i class="fa-solid fa-database mr-1"></i> IndexedDB Ready
+        </span>
+    </div>
+    
+    <!-- Scrollable Form Area -->
+    <div class="space-y-5 overflow-y-auto pr-2 pb-4 flex-1">
+        
+        <!-- Demographics -->
+        <div class="p-3 bg-slate-50 rounded border border-slate-100">
+            <h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">Demographics</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div class="sm:col-span-2">
+                    <label class="block text-sm text-slate-600 mb-1">Patient Name</label>
+                    <input type="text" id="pat-name" value="Ramesh Kumar" class="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-600 mb-1">Age</label>
+                    <input type="number" id="pat-age" value="45" class="w-full p-2 border rounded outline-none text-sm">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-600 mb-1">Gender</label>
+                    <select id="pat-gender" class="w-full p-2 border rounded outline-none text-sm">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Clinical Vitals -->
+        <div class="p-3 bg-red-50 rounded border border-red-100">
+            <h4 class="text-xs font-bold text-red-500 uppercase tracking-wider mb-3">Triaged Vitals</h4>
+            <div class="grid grid-cols-3 gap-3">
+                <div>
+                    <label class="block text-xs text-slate-600 mb-1">BP (mmHg)</label>
+                    <input type="text" id="pat-bp" value="130/85" class="w-full p-2 border rounded outline-none text-sm bg-white">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-600 mb-1">SpO2 (%)</label>
+                    <input type="number" id="pat-spo2" value="96" class="w-full p-2 border rounded outline-none text-sm bg-white">
+                </div>
+                <div>
+                    <label class="block text-xs text-slate-600 mb-1">Temp (°F)</label>
+                    <input type="number" id="pat-temp" value="99.1" class="w-full p-2 border rounded outline-none text-sm bg-white">
+                </div>
+            </div>
+        </div>
+
+        <!-- Medical Details -->
+        <div class="p-3 bg-indigo-50 rounded border border-indigo-100">
+            <h4 class="text-xs font-bold text-indigo-500 uppercase tracking-wider mb-3">Diagnostics & Rx</h4>
+            <div class="space-y-3">
+                <div>
+                    <label class="block text-sm text-slate-600 mb-1">Chief Complaint</label>
+                    <input type="text" id="pat-complaint" value="Severe lower back pain after lifting debris. Suspected muscle strain." class="w-full p-2 border rounded outline-none text-sm bg-white">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-600 mb-1">Prescription Instructions</label>
+                    <input type="text" id="pat-rx" value="Take Paracetamol 1 in morning, 1 at night." class="w-full p-2 border rounded outline-none text-sm bg-white">
+                </div>
+                <div>
+                    <label class="block text-sm text-slate-600 mb-1">Audio Language (TTS)</label>
+                    <select id="pat-lang" class="w-full p-2 border rounded outline-none text-sm bg-white">
+                        <option value="en-IN">English (India)</option>
+                        <option value="hi-IN">Hindi</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <button onclick="saveHealthData()" class="w-full mt-4 bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition font-semibold shadow-md">
+        <i class="fa-solid fa-lock mr-2"></i> Save & Generate Encrypted Passport
+    </button>
+</div>
