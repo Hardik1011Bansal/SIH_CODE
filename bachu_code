@@ -24,6 +24,41 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans h-screen flex overflow-hidden">
 
+    <!-- ========================================== -->
+    <!-- LANDING CHOICE SCREEN                       -->
+    <!-- ========================================== -->
+    <div id="landing-screen" class="w-full h-screen flex flex-col items-center justify-center bg-gradient-to-br from-indigo-900 to-indigo-700 text-white p-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold tracking-tight mb-3"><i class="fa-solid fa-network-wired mr-3"></i>SIH 2026 Core</h1>
+            <p class="text-indigo-200">Unified Infrastructure Prototype — choose a module to begin</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl w-full">
+            <button onclick="chooseSection('tab-transit')" class="landing-btn bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl p-8 flex flex-col items-center text-center transition transform hover:scale-105">
+                <i class="fa-solid fa-bus-simple text-4xl mb-4"></i>
+                <span class="font-bold text-lg">TransitMesh Simulator</span>
+                <span class="text-xs text-indigo-200 mt-2">P2P offline sync via bus network</span>
+            </button>
+            <button onclick="chooseSection('tab-health')" class="landing-btn bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl p-8 flex flex-col items-center text-center transition transform hover:scale-105">
+                <i class="fa-solid fa-id-card-clip text-4xl mb-4"></i>
+                <span class="font-bold text-lg">Migrant Health PWA</span>
+                <span class="text-xs text-indigo-200 mt-2">Offline clinical intake & Rx</span>
+            </button>
+            <button onclick="chooseSection('tab-schemes')" class="landing-btn bg-white/10 hover:bg-white/20 border border-white/20 rounded-2xl p-8 flex flex-col items-center text-center transition transform hover:scale-105">
+                <i class="fa-solid fa-hands-holding-circle text-4xl mb-4"></i>
+                <span class="font-bold text-lg">Scheme & OCR Engine</span>
+                <span class="text-xs text-indigo-200 mt-2">Scheme discovery & auto-fill</span>
+            </button>
+        </div>
+        <button onclick="chooseSection('tab-demo')" class="mt-10 text-sm text-indigo-200 hover:text-white underline underline-offset-4">
+            Or watch the full "Ramesh Story" walkthrough
+        </button>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- APP SHELL (hidden until a module is chosen) -->
+    <!-- ========================================== -->
+    <div id="app-shell" class="hidden w-full h-full flex">
+
     <!-- Sidebar Navigation -->
     <aside class="w-64 bg-indigo-900 text-white flex flex-col shadow-xl z-20">
         <div class="p-6 border-b border-indigo-800">
@@ -31,16 +66,16 @@
             <p class="text-xs text-indigo-300 mt-1">Unified Infrastructure Prototype</p>
         </div>
         <nav class="flex-1 p-4 space-y-2">
-            <button onclick="switchTab('tab-demo')" class="nav-btn w-full flex items-center p-3 rounded-lg bg-indigo-800 text-white transition">
+            <button data-tab="tab-demo" onclick="switchTab('tab-demo')" class="nav-btn w-full flex items-center p-3 rounded-lg hover:bg-indigo-800 text-indigo-100 transition">
                 <i class="fa-solid fa-play-circle w-6"></i> The Ramesh Story (Demo)
             </button>
-            <button onclick="switchTab('tab-transit')" class="nav-btn w-full flex items-center p-3 rounded-lg hover:bg-indigo-800 text-indigo-100 transition">
+            <button data-tab="tab-transit" onclick="switchTab('tab-transit')" class="nav-btn w-full flex items-center p-3 rounded-lg hover:bg-indigo-800 text-indigo-100 transition">
                 <i class="fa-solid fa-bus-simple w-6"></i> TransitMesh Simulator
             </button>
-            <button onclick="switchTab('tab-health')" class="nav-btn w-full flex items-center p-3 rounded-lg hover:bg-indigo-800 text-indigo-100 transition">
+            <button data-tab="tab-health" onclick="switchTab('tab-health')" class="nav-btn w-full flex items-center p-3 rounded-lg hover:bg-indigo-800 text-indigo-100 transition">
                 <i class="fa-solid fa-id-card-clip w-6"></i> Migrant Health PWA
             </button>
-            <button onclick="switchTab('tab-schemes')" class="nav-btn w-full flex items-center p-3 rounded-lg hover:bg-indigo-800 text-indigo-100 transition">
+            <button data-tab="tab-schemes" onclick="switchTab('tab-schemes')" class="nav-btn w-full flex items-center p-3 rounded-lg hover:bg-indigo-800 text-indigo-100 transition">
                 <i class="fa-solid fa-hands-holding-circle w-6"></i> Scheme & OCR Engine
             </button>
         </nav>
@@ -55,7 +90,7 @@
         <!-- ========================================== -->
         <!-- TAB 0: UNIFIED DEMO ("The Ramesh Story")   -->
         <!-- ========================================== -->
-        <section id="tab-demo" class="tab-content p-8 block">
+        <section id="tab-demo" class="tab-content p-8 hidden">
             <div class="max-w-4xl mx-auto">
                 <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 text-center mb-8">
                     <h2 class="text-3xl font-bold text-slate-800 mb-4">Live Orchestration: "The Ramesh Story"</h2>
@@ -246,34 +281,6 @@
         <i class="fa-solid fa-lock mr-2"></i> Save & Generate Encrypted Passport
     </button>
 </div>
-                    
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm text-slate-600 mb-1">Patient Name</label>
-                            <input type="text" id="pat-name" value="Ramesh Kumar" class="w-full p-2 border rounded focus:ring-2 focus:ring-indigo-500 outline-none">
-                        </div>
-                        <div class="flex gap-4">
-                            <div class="flex-1">
-                                <label class="block text-sm text-slate-600 mb-1">Age</label>
-                                <input type="number" id="pat-age" value="45" class="w-full p-2 border rounded outline-none">
-                            </div>
-                            <div class="flex-1">
-                                <label class="block text-sm text-slate-600 mb-1">Language</label>
-                                <select id="pat-lang" class="w-full p-2 border rounded outline-none">
-                                    <option value="en-IN">English (India)</option>
-                                    <option value="hi-IN">Hindi (TTS Supported)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm text-slate-600 mb-1">Prescription Details (e.g., Paracetamol 1-0-1)</label>
-                            <input type="text" id="pat-rx" value="Take Paracetamol 1 in morning, 1 at night." class="w-full p-2 border rounded outline-none">
-                        </div>
-                        <button onclick="saveHealthData()" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition">
-                            Save Locally & Generate Passport
-                        </button>
-                    </div>
-                </div>
 
                 <!-- Digital Badge Output -->
                 <div class="bg-indigo-50 p-6 rounded-xl border border-indigo-100 flex flex-col items-center justify-center text-center">
@@ -367,9 +374,21 @@
         </section>
 
     </main>
+    </div><!-- /app-shell -->
 
     <!-- CORE JAVASCRIPT ARCHITECTURE -->
     <script>
+        /* ========================================================
+           LANDING -> APP SHELL TRANSITION
+           ======================================================== */
+        function chooseSection(tabId) {
+            document.getElementById('landing-screen').classList.add('hidden');
+            const shell = document.getElementById('app-shell');
+            shell.classList.remove('hidden');
+            shell.classList.add('flex');
+            switchTab(tabId);
+        }
+
         /* ========================================================
            TAB MANAGEMENT
            ======================================================== */
@@ -382,8 +401,11 @@
                 btn.classList.remove('bg-indigo-800', 'text-white');
                 btn.classList.add('hover:bg-indigo-800', 'text-indigo-100');
             });
-            event.currentTarget.classList.remove('hover:bg-indigo-800', 'text-indigo-100');
-            event.currentTarget.classList.add('bg-indigo-800', 'text-white');
+            const activeBtn = document.querySelector(`.nav-btn[data-tab="${tabId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.remove('hover:bg-indigo-800', 'text-indigo-100');
+                activeBtn.classList.add('bg-indigo-800', 'text-white');
+            }
         }
 
         const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -412,7 +434,7 @@
             await sleep(2500);
 
             // Step 2: TransitMesh
-            document.querySelectorAll('.nav-btn')[0].click(); // Go back to demo tab visually
+            switchTab('tab-demo');
             document.getElementById('step-1').classList.replace('opacity-100', 'opacity-50');
             document.getElementById('step-2').classList.replace('opacity-50', 'opacity-100');
             await sleep(1500);
@@ -421,7 +443,7 @@
             await sleep(4000); // wait for bus animation
 
             // Step 3: Rx Output
-            document.querySelectorAll('.nav-btn')[0].click();
+            switchTab('tab-demo');
             document.getElementById('step-2').classList.replace('opacity-100', 'opacity-50');
             document.getElementById('step-3').classList.replace('opacity-50', 'opacity-100');
             await sleep(1500);
@@ -430,7 +452,7 @@
             await sleep(3500);
 
             // Step 4: Scheme & OCR
-            document.querySelectorAll('.nav-btn')[0].click();
+            switchTab('tab-demo');
             document.getElementById('step-3').classList.replace('opacity-100', 'opacity-50');
             document.getElementById('step-4').classList.replace('opacity-50', 'opacity-100');
             await sleep(1500);
@@ -440,7 +462,7 @@
             await sleep(2000);
 
             // End Demo
-            document.querySelectorAll('.nav-btn')[0].click();
+            switchTab('tab-demo');
             btn.innerHTML = '<i class="fa-solid fa-check mr-2"></i> Demo Complete - Restart';
             btn.disabled = false;
         }
@@ -551,7 +573,6 @@
             const utterance = new SpeechSynthesisUtterance(text);
             utterance.lang = lang;
             
-            // Add some Indian context if Hindi is selected but text is English (browser attempts transliteration)
             speechSynthesis.speak(utterance);
         }
 
@@ -632,7 +653,6 @@
                 console.log("OCR Extracted Text:", text);
 
                 // Deterministic Regex parsing (Mock Logic for Indian IDs / Income certs)
-                // Example format expected in image: "Name: John Doe", "ID: 123456789012", "Income: 50000"
                 const nameMatch = text.match(/Name[\s:]+([A-Za-z\s]+)/i);
                 const idMatch = text.match(/(?:ID|Aadhaar|UAN)[\s:]+(\d{10,12})/i);
                 const incomeMatch = text.match(/Income[\s:Rs\.]+([\d,]+)/i);
